@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block body %}
+<div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-medium-1-3">
+        <div class="uk-grid">
+            <div class="uk-width-1-6">
+                <i class="uk-icon-cog uk-icon-large uk-text-primary"></i>
+            </div>
+            <div class="uk-width-5-6">
+                <h2 class="uk-h3">Sample Heading</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-width-medium-1-3">
+        <div class="uk-grid">
+            <div class="uk-width-1-6">
+                <i class="uk-icon-thumbs-o-up uk-icon-large uk-text-primary"></i>
+            </div>
+            <div class="uk-width-5-6">
+                <h2 class="uk-h3">Sample Heading</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-width-medium-1-3">
+        <div class="uk-grid">
+            <div class="uk-width-1-6">
+                <i class="uk-icon-cloud-download uk-icon-large uk-text-primary"></i>
+            </div>
+            <div class="uk-width-5-6">
+                <h2 class="uk-h3">Sample Heading</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="uk-button" data-uk-modal="{target:'#my-id2'}">open</button>
+
+<!-- This is the modal -->
+<div id="my-id2" class="uk-modal" style="display: none;">
+    <div class="uk-modal-dialog">
+        <a href="" class="uk-modal-close uk-close"></a>
+        <h1>Headline</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+</div>
+<table>
+    <tr>
+        <td data-click  data-aaa="asc">sdfdsf</td>
+        <td data-click>sdfdsfds</td>
+        <td data-click>dsfdsf</td>
+        <td data-click>sdfdsf</td>
+    </tr>
+    <tr>
+        <td>sd</td>
+        <td>sd</td>
+        <td>sd</td>
+        <td>sd</td>
+    </tr>
+</table>
+
+{% endblock %}

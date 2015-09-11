@@ -1,0 +1,31 @@
+<!--
+  The navigation UI that is docked to the top of the window. Most of this markup simply
+  follows Bootstrap conventions. The only Knockout-specific parts are the data-bind
+  attributes on the <li> elements.
+-->
+<nav class="uk-navbar uk-margin-large-bottom">
+    <a class="uk-navbar-brand uk-hidden-small" href="layouts_frontpage.html">Brand</a>
+    <ul class="uk-navbar-nav uk-hidden-small">
+        <li data-bind="css: { 'uk-active': route().page === 'home-page' }">
+			<a href="#">Home</a>
+		</li>
+		<li data-bind="css: { 'uk-active': route().page === 'about-page' }">
+			<a href="#about">About</a>
+		</li>
+    </ul>
+    <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
+    <div class="uk-navbar-brand uk-navbar-center uk-visible-small">Brand</div>
+</nav>
+
+<div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-offcanvas">
+            <li data-bind="css: { 'uk-active': route().page === 'home-page' }">
+                <a href="#">Home</a>
+            </li>
+            <li data-bind="css: { 'uk-active': route().page === 'about-page' }">
+                <a href="#about">About</a>
+            </li>
+        </ul>
+    </div>
+</div>

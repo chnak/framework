@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title %}User system{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block body %}
+<nav-bar params="route: route"></nav-bar>
+<div id="page" class="container" data-bind="component: { name: route().page, params: route }">
+	<div style="position: fixed;top: 50%; left: 50%; margin-top: -30px;margin-left: -30px;"><i class="uk-icon-spinner uk-icon-spin" style="font-size: 60px;"></i></div>
+</div>
+{% endblock %}
