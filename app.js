@@ -10,7 +10,7 @@ var misc = require('./misc/');
 var lodash = require('lodash');
 var config = require("./config");
 var controllers=require("./controllers");
-var db = require('./model');
+//var db = require('./model');
 
 var defaults={
 	method:"POST",
@@ -65,7 +65,7 @@ app.get('*',function(req,res,next){
 
 
 misc.load(app,controllers,{
-	db:db,
+	//db:db,
     lodash:lodash,
     vd:validator,
     async:async
@@ -81,10 +81,11 @@ app.on('close', function(errno) {
 	console.log('close')
     //db.disconnect(function(err) { });
 });
-
+/*
 db.onReady(function(){
 	console.log('db is ready');
 })
+*/
 app.listen(app.get('port'),function(){
   console.log("Express server listening on port " + app.get('port'));
 });  
