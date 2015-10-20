@@ -6,13 +6,14 @@ var config = require('../config');
 
 exports.index = function(req, res, next){
 	var db=this.db;
-	var user_id=req.session.userId;
-	if(!user_id)return next(); //#####
+	var userId=req.session.userId;
+	if(!userId)return res.render('error',{message:'没有足够的访问权限。'});//res.send(401,'没有足够的访问权限。');
     this.async.series({
 		user:function(cb){
 			db.Users.filter(function(it){
-				return it.Id==user_id;
-			}).first()
+				return it.Id==this.userId;
+			},{userId:userId})
+			.first()
 			.then(function(d){
 				cb(null,d);
 			})
@@ -21,7 +22,7 @@ exports.index = function(req, res, next){
 			})
 		}
 	},function(err,result){
-		if(err)return res.json(err);
+		if(err)return res.status(500).json(err);
 		res.locals.user=result.user;
 		next();
 	})

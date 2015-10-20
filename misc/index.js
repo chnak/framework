@@ -117,12 +117,9 @@ exports.ErrorLog=function ErrorLog(){
         var reqDomain = domain.create();
 		reqDomain.add(req);
 		reqDomain.add(res);
+        reqDomain.add(this);
 		reqDomain.on('error', function (err) {
-			try{ 
-				res.writeHead(500);
-			}catch(err){};
-			console.log(err)
-			res.end('Server Error'); 
+			res.send(500,'Server Error'); 
 		});
 		var ms_start=(new Date()).getTime();
 		req.on('end', function() {

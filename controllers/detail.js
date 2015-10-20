@@ -21,54 +21,15 @@ exports.login = function(req, res){
 }
 
 exports.signup = function (req, res, next) {
-    var db=this.db;
-    var kw=req.query;
-    
-    var nw=new $context.User({Account:kw.account,PassWord:kw.password});
-    
-    this.async.series({
-    		newOne:function(cb){
-    			if(!nw.isVaild())cb({ret:-1,msg:'输入信息有误。'});
-    			cb(null,nw)
-    		},
-            hasOne:function(cb){
-                db.Users.filter(function(it){
-                	return it.Account==kw.account;
-                }).count()
-                .then(function(d){
-                	if(d)cb({ret:-1,msg:'用户名已存在。'});
-                	cb(null,d);
-                })
-                   
-            },
-            addDone:function(cb){
-                var add=db.Users.add(nw)
-                util.cb(cb).bind(add);
-            }
-        },function(err,results){
-            if(err)return res.json(err);
-            res.json({ret:0,msg:'注册成功！'})
-        })
-    
-
- //    var data={};
-	// res.render('signup',data);
+    res.render('signup');
 };
 
-exports.signin = function (req, res, next) {
-    var db=this.db;
-    var kw=req.query;
-    db.Users.filter(function(it){
-    	return it.Account==kw.account&&it.PassWord==kw.password
-    }).first()
-    .then(function(data){
-    	res.json(data)
-    })
-    .fail(function(err){
-    	res.json(err);
-    })
-    //var data={};
-	//res.render('signin',data);
+exports.view = function (req, res, next) {
+	var qs=this.qs.stringify(req.query);
+	qs=qs?'?'+qs:'';
+	var link=req.params[0]+qs;
+	console.log(link)
+	res.render('view',{link:link});
 };
 
 exports.userInfo = function (req, res, next) {
@@ -85,7 +46,7 @@ exports.editUser = function (req, res, next) {
 
 exports.task = function (req, res, next) {
     //var db=this.db;
-    var user=new $context.User({Account:'dfds',PassWord:'asdfdsfds',Amount:10.5});
+    var user=new $context.User({Account:'chnak',PassWord:'8393112',Amount:10.5});
 	//console.dir(user.getType());
 	console.log(user.isValid());
 	user

@@ -7,38 +7,43 @@
   <title>{% block title %}My Site{% endblock %}</title>
   <!-- build:css -->
   <link href="/css/uikit.min.css" rel="stylesheet" />
-  <!-- link href="/css/uikit.gradient.min.css" rel="stylesheet" / -->
+  <link href="/css/uikit.gradient.min.css" rel="stylesheet" />
+  <link href="/css/style.css" rel="stylesheet" />
   <!-- link href="/css/uikit.almost-flat.min.css" rel="stylesheet" / -->
-  <!--
-  <script type="text/javascript" src="/js/lib/jquery.min.js" ></script>
-  <script type="text/javascript" src="/js/lib/jquery.tmpl.js" ></script>
-  <script type="text/javascript" src="/js/lib/uikit.min.js" ></script>
--->
-  <script src="/js/require.config.js"></script>
-  <script data-main="js/main" src="/js/require.js"></script>
-  <!-- endbuild -->
-  {% block head %}{% endblock %}
+
+<script src="/js/require.config.js"></script>
+<script data-main="js/main" src="/js/require.js"></script>
+<!-- endbuild -->
+{% block head %}{% endblock %}
 </head>
 <body>
 
-<div id="main-global">
+  <div id="main-global">
     <div style="width:1px;height:1px;font-size: 50px;position: fixed;left: 50%; top: 50%; z-index: 9999;margin-top: -30px; margin-left: -30px;" data-bind="visible:firstLoading">
       <i class="uk-icon-spinner uk-icon-spin" ></i>
     </div>
-</div>
+  </div>
   
-<div id="content">
+  <div  id="content" style="display:none">
 {% endif %}
+
+
+    {% if PJAX%}
+      <title>{% block title %}My Site{% endblock %}</title>
+      {% block head %}{% endblock %}
+    {% endif %}
     {% block header %}
-      {% include "header.html" %}
+      <widget-nav></widget-nav>
     {% endblock %}
+    <div class="uk-container uk-container-center">
     {% block body %}{% endblock %}
-    <!--{% include "footer.html" %}-->
+    </div>
+    {# include "footer.html" #}
+
+
 {% if !PJAX %}  
-</div>
+  </div>
   
-
-
 </body>
 </html>
 {% endif %}
