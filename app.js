@@ -7,8 +7,8 @@ var validator = require('validator');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
-var MongoStore = require("connect-mongo")(session);
-var Server = require('mongodb').Server;
+//var MongoStore = require("connect-mongo")(session);
+//var Server = require('mongodb').Server;
 var cookieParser = require('cookie-parser');
 var misc = require('./misc/');
 var lodash = require('lodash');
@@ -64,7 +64,7 @@ app.use(session({
   cookie: { maxAge: 1000*60*60*24*30 },
   resave:false,
   saveUninitialized:true,
-  store:new MongoStore({db:'Seesion'/*,host:'127.0.0.1',port:27017*/})
+  //store:new MongoStore({db:'Seesion'/*,host:'127.0.0.1',port:27017*/})
 }))
 
 
