@@ -91,11 +91,18 @@ app.get('*',function(req,res,next){
 
 misc.load(app,controllers,mainMouble);
 
-app.use(function(err,req,res,next){
-  console.log('===',err)
-  next()
-})
 
+app.use(function(err,req,res,next){
+  var _=this.lodash;
+  err=err||{};
+  err.status=err.status||404;
+  err.dataType=err.dataType||'string';
+  err.tmplPath=err.tmplPath||null;
+  err.message=err.message||'Unkown';
+  var data=_.pick(err,['status','message']);
+  res.status(err.status).json(data)
+
+}.bind(mainMouble))
 
 app.on('close', function(errno) {
   console.log('close')
