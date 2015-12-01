@@ -1,0 +1,14 @@
+
+db.Users.add({Account:'xxxx'}).isValid();
+
+db.filter(function(it){return it.Account=='xxx'}).first().then().fail();
+
+FormValidation:
+
+http://jaydata.org/examples/General/FormValidation
+
+聚合信息：
+https://www.juhe.cn/
+
+短信平台：
+http://www.yuntongxun.com/solution/smsAndLandingCall?kw=BPyzm

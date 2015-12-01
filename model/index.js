@@ -1,4 +1,4 @@
-var $data = require("jaydata");
+var $data = require("jaydata-mongodb");
 var lodash = require('lodash');
 var $context=require("./context");
 var $logger=require("./logger");
