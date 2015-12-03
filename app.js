@@ -7,8 +7,8 @@ var validator = require('validator');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
-//var MongoStore = require("connect-mongo")(session);
-//var Server = require('mongodb').Server;
+var MongoStore = require("connect-mongo")(session);
+var Server = require('mongodb').Server;
 var cookieParser = require('cookie-parser');
 var misc = require('./misc/');
 var lodash = require('lodash');
@@ -18,14 +18,14 @@ var db = require('./model');
 
 
 var defaults={
-  method:"POST",
-  uri:{
-    protocol:'http:',
-    host:'www.qq.com',
-    port:null,
-  },
-  timeout:20000,
-  json:false
+	method:"POST",
+	uri:{
+		protocol:'http:',
+		host:'www.qq.com',
+		port:null,
+	},
+	timeout:20000,
+	json:false
 }
 
 var mainMouble={
@@ -64,7 +64,7 @@ app.use(session({
   cookie: { maxAge: 1000*60*60*24*30 },
   resave:false,
   saveUninitialized:true,
-  //store:new MongoStore({db:'Seesion'/*,host:'127.0.0.1',port:27017*/})
+  store:new MongoStore({db:'Seesion'/*,host:'127.0.0.1',port:27017*/})
 }))
 
 
@@ -91,18 +91,20 @@ app.get('*',function(req,res,next){
 
 misc.load(app,controllers,mainMouble);
 
-
 app.use(function(err,req,res,next){
+  console.log(err);
   var _=this.lodash;
   err=err||{};
-  err.status=err.status||404;
-  err.dataType=err.dataType||'string';
-  err.tmplPath=err.tmplPath||null;
+  err.status=err.status||500;
   err.message=err.message||'Unkown';
-  var data=_.pick(err,['status','message']);
-  res.status(err.status).json(data)
+  if(err.status==0)err.message="Success";
+  var data=_.pick(err,['status','message','data']);
+
+  res.json(data)
+
 
 }.bind(mainMouble))
+
 
 app.on('close', function(errno) {
   console.log('close')

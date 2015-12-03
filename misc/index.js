@@ -15,7 +15,7 @@ var defaults={
 }
 
 function FuncQuery(defaults){
-	
+
     var addFormData=function(options,ajax){
         var formData = options.formData
         var requestForm = ajax.form()
@@ -41,11 +41,17 @@ function FuncQuery(defaults){
     }
 
     this.ajax=function(options,callback){
-		request.defaults(defaults||{});
+		defaults=defaults||{};
+		defaults.uri=defaults.uri||{};
+		request.defaults(defaults);
 		var uri=url.parse(options.path);
+		console.log(defaults.uri)
 		lodash.forEach(uri,function(value,key){
-           uri[key]=uri[key]?uri[key]:defaults.uri[key];
+					if(uri[key]===null){
+						uri[key]=defaults.uri[key]||null;
+					}
         })
+				console.log(uri)
         options.uri=url.format(uri);
         options.form=options.data;
 		delete options.path;
@@ -58,7 +64,7 @@ function FuncQuery(defaults){
                 console.log('REQUEST SUCCESS: ',options.method,url.format(options.uri),response.statusCode,cost_time,'\n',options.form,'\n',body.msg);
                 if(options.success)return options.success(body);
             }else{
-                if(options.error)return options.error(error, response, body); 
+                if(options.error)return options.error(error, response, body);
             }
 
         }
@@ -70,7 +76,7 @@ function FuncQuery(defaults){
     return this;
 }
 
- 
+
 function pageModel(data){
         var o={
             page:0,
@@ -119,7 +125,7 @@ exports.ErrorLog=function ErrorLog(){
 		reqDomain.add(res);
         reqDomain.add(this);
 		reqDomain.on('error', function (err) {
-			res.send(500,'Server Error'); 
+			res.send(500,'Server Error');
 		});
 		var ms_start=(new Date()).getTime();
 		req.on('end', function() {
@@ -167,5 +173,3 @@ exports.load=function(app,lists,params){
 exports.FuncQuery=FuncQuery;
 
 exports.pageModel=pageModel;
-
-

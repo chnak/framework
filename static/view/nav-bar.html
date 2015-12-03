@@ -1,0 +1,26 @@
+<!--
+  The navigation UI that is docked to the top of the window. Most of this markup simply
+  follows Bootstrap conventions. The only Knockout-specific parts are the data-bind
+  attributes on the <li> elements.
+-->
+
+<script type="text/html" id="tmpl-nav-list">
+{{each(i,r) navList}}
+    <li {{if r.path==active()}}class="uk-active"{{/if}}>
+        <a href="{{= r.path}}"  title="{{= r.name}}" {{if r.pjax}}ac-pjax{{/if}} >{{= r.name}}</a>
+    </li>
+{{/each}}
+</script>
+
+<nav class="uk-navbar uk-margin-large-bottom">
+    <a class="uk-navbar-brand uk-hidden-small" href="/" ac-pjax >Brand</a>
+    <ul class="uk-navbar-nav uk-hidden-small" data-bind="template:'tmpl-nav-list'"></ul>
+    <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
+    <div class="uk-navbar-brand uk-navbar-center uk-visible-small">Brand</div>
+</nav>
+
+<div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-offcanvas" data-bind="template:'tmpl-nav-list'"></ul>
+    </div>
+</div>

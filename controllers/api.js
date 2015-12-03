@@ -7,7 +7,7 @@ var util = require('../misc/util');
 
 
 
-exports.login = function(req, res){
+exports.login = function(req, res, next){
     var _=this.lodash;
     var db=this.db;
     db.Users.filter(function(it){
@@ -16,14 +16,12 @@ exports.login = function(req, res){
     .then(function(data){
         data=_.pick(data,['Id','Account','Name']);
         req.session.userId=data.Id;
-        res.json(data);
+        next({status:0,data:data});
     })
-    .fail(function(err){
-        res.status(500).json(err);
-    })
+    .fail(next)
 }
 
-exports.signup = function(req, res){
+exports.signup = function(req, res, next){
     var _=this.lodash;
     var db=this.db;
     var kw=req.body;
@@ -34,26 +32,23 @@ exports.signup = function(req, res){
             },kw).count()
             .then(function(count){
                 if(!count)return cb(null,count);
-                return res.status(500).json({message:'该账户已存在。'});
+                cb({message:'该账户已存在。'});
             })
-            .fail(function(err){
-                res.status(500).json(err);
-            })
+            .fail(cb)
         },
         add:function(cb){
             var user=new $context.User({Account:kw.account,PassWord:kw.password});
-            if(!user.isValid())return res.status(500).json({message:'请检查注册信息是否错误。'});
+            if(!user.isValid())return cb({message:'请检查注册信息是否错误。'});
             user.save()
                 .then(function(user){
                     var data=_.pick(user,['Id','Account','Amount','CreatDate','EditDate']);
                     cb(null,data);
                 })
-                .fail(function(err){
-                    res.status(500).json(err);
-                })
+                .fail(cb)
         }
     },function(err,result){
-        if(err)return res.status(500).json(err);
-        res.json(result.add);
+        if(err)return next(err);
+        req.session.userId=result.Id;
+        next({status:0,data:result.add});
     })
 }

@@ -17,12 +17,10 @@ exports.index = function(req, res, next){
 			.then(function(d){
 				cb(null,d);
 			})
-			.fail(function(err){
-				cb(err,null);
-			})
+			.fail(cb)
 		}
 	},function(err,result){
-		if(err)return res.status(500).json(err);
+		if(err)next(err)
 		res.locals.user=result.user;
 		next();
 	})

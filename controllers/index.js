@@ -7,6 +7,8 @@ var lists=[
 	{path:'/task', method:'get',  action:detail.task},
 	{path:'/login', method:'get', action:detail.login},
 	{path:'/signup', method:'get', action:detail.signup},
+	{path:'/about', method:'get', action:detail.about},
+	{path:'/bigpipe', method:'get', action:detail.bigpipe},
 	{path:'/user', method:'get', auth:auth.index, action:detail.user},
 	{path:'/v/*', method:'all', action:detail.view},
 

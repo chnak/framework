@@ -12,6 +12,10 @@ exports.index = function (req, res, next) {
 	})
 };
 
+exports.about = function(req, res){
+    res.render('about');
+}
+
 exports.user = function(req, res){
     res.render('user');
 }
@@ -44,6 +48,23 @@ exports.editUser = function (req, res, next) {
 	res.render('editUser',data);
 };
 
+exports.bigpipe = function(req, res, next){
+    var list=["http://qq.com","http://www.sina.com.cn"];
+    res.pipeCount=list.length+1;
+    res.bigpipe('view.html', {data:'主模板'+11111111,link:'xxxxx'});
+    list.forEach(function(link){
+      req.ajax({
+          path:link,
+          type:'get',
+          success:function(data){
+              //data.name=this.data.name;
+              res.bigpipe('pipe.html', {data:data});
+          }
+      })
+    })
+}
+
+
 exports.task = function (req, res, next) {
     //var db=this.db;
     var user=new $context.User({Account:'chnak',PassWord:'8393112',Amount:10.5});
@@ -65,4 +86,3 @@ exports.task = function (req, res, next) {
 	})
 	*/
 };
-

@@ -2,12 +2,12 @@ define(['jquery','knockout','uikit','js/base','notify','tooltip.min'], function(
     window.jQuery=window.$=$;
     window.ko=ko;
     // Components can be packaged as AMD modules, such as the following:
-    ko.components.register('widget-nav', { require: 'view/widget/nav-bar' });
-    ko.components.register('widget-login', { require: 'view/widget/login-box' });
-    ko.components.register('widget-signup', { require: 'view/widget/signup-box' });
+    ko.components.register('widget-nav', { require: 'view/nav-bar' });
+    ko.components.register('widget-login', { require: 'view/login-box' });
+    ko.components.register('widget-signup', { require: 'view/signup-box' });
     // ... or for template-only components, you can just point to a .html file directly:
     ko.components.register('about-page', {
-      template: { require: 'text!view/about-page/about.html' }
+      template: { require: 'text!view/about.html' }
     });
 
     // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
