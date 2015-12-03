@@ -49,16 +49,18 @@ exports.editUser = function (req, res, next) {
 };
 
 exports.bigpipe = function(req, res, next){
-    var list=["http://qq.com","http://www.sina.com.cn"];
+    var list=["http://qq.com","http://www.sina.com.cn","http://qq.com","http://qq.com","http://qq.com","http://qq.com","http://qq.com","http://qq.com","http://qq.com","http://qq.com"];
     res.pipeCount=list.length+1;
-    res.bigpipe('view.html', {data:'主模板'+11111111,link:'xxxxx'});
+    res.bigpipe('test.html', {data:'主模板'+11111111,link:'xxxxx'});
+    var start_time=(new Date()).getTime();
     list.forEach(function(link){
       req.ajax({
           path:link,
           type:'get',
           success:function(data){
-              //data.name=this.data.name;
-              res.bigpipe('pipe.html', {data:data});
+            var end_time=(new Date()).getTime();
+            var cost_time=(end_time-start_time)+'ms';
+              res.bigpipe('pipe.html', {data:cost_time});
           }
       })
     })

@@ -45,13 +45,11 @@ function FuncQuery(defaults){
 		defaults.uri=defaults.uri||{};
 		request.defaults(defaults);
 		var uri=url.parse(options.path);
-		console.log(defaults.uri)
 		lodash.forEach(uri,function(value,key){
 					if(uri[key]===null){
 						uri[key]=defaults.uri[key]||null;
 					}
         })
-				console.log(uri)
         options.uri=url.format(uri);
         options.form=options.data;
 		delete options.path;

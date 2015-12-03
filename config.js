@@ -6,4 +6,4 @@ exports.site_name = 'Node TODO';
 exports.site_desc = 'Very simple todo, demo for connect web dev.';
 exports.session_secret = 'todo session secret';
 
-exports.db = {provider: 'mongoDB' , databaseName: 'MyTodoDatabase', address:"coker001.imwork.net",port:23309}
+exports.db = {provider: 'mongoDB' , databaseName: 'MyTodoDatabase', address:"127.0.0.1",port:27017}
